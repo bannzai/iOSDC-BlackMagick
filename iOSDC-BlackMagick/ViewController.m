@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <objc/runtime.h>
 
 @interface ViewController ()
 
@@ -16,14 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));
+    objc_registerClassPair(aClass);
+    
+    
+    id aaaa = [[NSClassFromString(@"A") alloc] init];
+    NSString *string = @"hogehoge";
+    
+    NSLog(@"A: %@, string: %@", aaaa, string);
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
