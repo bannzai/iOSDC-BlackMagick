@@ -15,25 +15,13 @@
 
 @implementation ViewController
 
-void function(NSMutableArray *array) {
-    NSLog(@"%@", array);
-}
-
-void objc_enumerationMutation(id obj) {
-    NSLog(@"%@", obj);
-//    NSException *exception = [NSException exceptionWithName:@"Array Error" reason:@"Exception" userInfo:nil];
-//    [exception raise];
-}
-
-void (^piyoBlock)(id obj) = ^(id obj)
-{
-    NSLog(@"piyo");
-};
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+}
+
+- (void)enumerationMutation {
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
     
@@ -45,6 +33,16 @@ void (^piyoBlock)(id obj) = ^(id obj)
     NSLog(@"array: %@", array);
 }
 
+void function(NSMutableArray *array) {
+    NSLog(@"%@", array);
+}
+
+void objc_enumerationMutation(id obj) {
+    NSLog(@"%@", obj);
+    //    NSException *exception = [NSException exceptionWithName:@"Array Error" reason:@"Exception" userInfo:nil];
+    //    [exception raise];
+}
+
 - (void)addClass {
     Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));
     objc_registerClassPair(aClass);
@@ -54,6 +52,11 @@ void (^piyoBlock)(id obj) = ^(id obj)
     
     NSLog(@"A: %@, string: %@", aaaa, string);
 }
+
+void (^piyoBlock)(id obj) = ^(id obj)
+{
+    NSLog(@"piyo");
+};
 
 - (void)addMethodImplementationWithBlocks {
     SEL sel = NSSelectorFromString(@"piyo");
