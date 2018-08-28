@@ -21,11 +21,15 @@ void function(NSMutableArray *array) {
 
 void objc_enumerationMutation(id obj) {
     NSLog(@"%@", obj);
+//    NSException *exception = [NSException exceptionWithName:@"Array Error" reason:@"Exception" userInfo:nil];
+//    [exception raise];
 }
 
-void objc_setEnumerationMutationHandler(void (* _Nullable handler)(id  _Nonnull __strong args)) {
-    NSLog(@"a");
-}
+void (^piyoBlock)(id obj) = ^(id obj)
+{
+    NSLog(@"piyo");
+};
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,14 +43,31 @@ void objc_setEnumerationMutationHandler(void (* _Nullable handler)(id  _Nonnull 
     NSLog(@"A: %@, string: %@", aaaa, string);
     
     NSNumber *target = @2;
-    NSMutableArray *array = @[@1, target, @3].mutableCopy;
+    NSMutableArray *array = @[@1, target].mutableCopy;
     
-    objc_setEnumerationMutationHandler(function);
-    protocol_conformsToProtocol(<#Protocol * _Nullable proto#>, <#Protocol * _Nullable other#>)
+    SEL sel = NSSelectorFromString(@"piyo");
+    IMP imp = imp_implementationWithBlock(piyoBlock);
+    class_addMethod([ViewController class], sel, imp, "v@");
+    
+    [self performSelector:@selector(piyo)];
+    
 
     for (NSNumber *number in array) {
-        [array insertObject:@5 atIndex:0];
+        NSLog(@"number: %@", number);
+        [array removeObject:target];
     }
+    
+    NSLog(@"array: %@", array);
+}
+
+- (void)getClassName {
+    int numClasses;
+    Class * classes = NULL;
+    
+    classes = NULL;
+    numClasses = objc_getClassList(NULL, 0);
+    
+    NSLog(@"count: %d", numClasses);
 }
 
 @end
