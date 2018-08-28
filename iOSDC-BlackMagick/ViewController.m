@@ -9,6 +9,14 @@
 #import "ViewController.h"
 #import <objc/runtime.h>
 
+
+@protocol MyProtocol
+@required
+- (void)foo;
+@optional
+- (void)bar;
+@end
+
 @interface ViewController ()
 
 @end
@@ -21,7 +29,63 @@
 
     [self encodeType];
     
+    for (id element in [self getNSObjectSubClass]) {
+        NSLog(@"%@", element);
+    }
+    NSLog(@"%@", [ViewController implementedClasses:@protocol(MyProtocol)]);
 }
+
+- (NSArray *)getNSObjectSubClass {
+    int numClasses = objc_getClassList(NULL, 0);
+    Class parentClass = [NSObject class];
+    Class *classes = NULL;
+    
+    classes =  (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+    numClasses = objc_getClassList(classes, numClasses);
+
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSInteger i = 0; i < numClasses; i++)
+    {
+        // NSObjectを継承していないクラスを `addObject` しようとすると
+        // このエラーメッセージが出る
+        // does not implement methodSignatureForSelector
+        Class cls = classes[i];
+        Class superClass = cls;
+        
+        do {
+            superClass = class_getSuperclass(superClass);
+        }
+        while(superClass && superClass != parentClass);
+        
+        if (superClass == nil) {
+            continue;
+        }
+
+        [result addObject:cls];
+    }
+    
+    free(classes);
+    return result;
+}
+
++(NSArray *)implementedClasses:(Protocol *)protocol
+{
+    int bufferCount = objc_getClassList(nil, 0);
+    int implementedCount = 0;
+    Class bufferClasses[bufferCount];
+    Class implementedClasses[bufferCount];
+    objc_getClassList(bufferClasses, bufferCount);
+
+    for (int i = 0; i < bufferCount; i++)
+    {
+        if (!class_conformsToProtocol(bufferClasses[i], protocol)) continue;
+        
+        implementedClasses[implementedCount++] = bufferClasses[i];
+    }
+    
+    return [NSArray arrayWithObjects:implementedClasses count:implementedCount];
+}
+
 
 - (void) encodeType {
     
