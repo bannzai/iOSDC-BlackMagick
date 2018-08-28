@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self addClass];
 }
 
 - (void)enumerationMutation {
@@ -47,7 +48,7 @@ void objc_enumerationMutation(id obj) {
     Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));
     objc_registerClassPair(aClass);
     
-    id aaaa = [[NSClassFromString(@"A") alloc] init];
+    id aaaa = [[objc_getClass("A") alloc] init];
     NSString *string = @"hogehoge";
     
     NSLog(@"A: %@, string: %@", aaaa, string);
