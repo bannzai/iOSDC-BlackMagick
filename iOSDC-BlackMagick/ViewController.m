@@ -29,15 +29,15 @@
 
     [self encodeType];
     
-    for (id element in [self getNSObjectSubClass]) {
-        NSLog(@"%@", element);
+    for (id name in [self getAllClassName]) {
+        NSLog(@"name: %@", name);
     }
+    
     NSLog(@"%@", [ViewController implementedClasses:@protocol(MyProtocol)]);
 }
 
-- (NSArray *)getNSObjectSubClass {
+- (NSArray *)getAllClassName {
     int numClasses = objc_getClassList(NULL, 0);
-    Class parentClass = [NSObject class];
     Class *classes = NULL;
     
     classes =  (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
@@ -46,22 +46,9 @@
     NSMutableArray *result = [NSMutableArray array];
     for (NSInteger i = 0; i < numClasses; i++)
     {
-        // NSObjectを継承していないクラスを `addObject` しようとすると
-        // このエラーメッセージが出る
-        // does not implement methodSignatureForSelector
         Class cls = classes[i];
-        Class superClass = cls;
-        
-        do {
-            superClass = class_getSuperclass(superClass);
-        }
-        while(superClass && superClass != parentClass);
-        
-        if (superClass == nil) {
-            continue;
-        }
-
-        [result addObject:cls];
+        NSString *name = NSStringFromClass(cls);
+        [result addObject:name];
     }
     
     free(classes);
