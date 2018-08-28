@@ -34,14 +34,6 @@ void (^piyoBlock)(id obj) = ^(id obj)
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));
-    objc_registerClassPair(aClass);
-    
-    id aaaa = [[NSClassFromString(@"A") alloc] init];
-    NSString *string = @"hogehoge";
-    
-    NSLog(@"A: %@, string: %@", aaaa, string);
-    
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
     
@@ -51,6 +43,16 @@ void (^piyoBlock)(id obj) = ^(id obj)
     }
     
     NSLog(@"array: %@", array);
+}
+
+- (void)addClass {
+    Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));
+    objc_registerClassPair(aClass);
+    
+    id aaaa = [[NSClassFromString(@"A") alloc] init];
+    NSString *string = @"hogehoge";
+    
+    NSLog(@"A: %@, string: %@", aaaa, string);
 }
 
 - (void)addMethodImplementationWithBlocks {
