@@ -45,19 +45,20 @@ void (^piyoBlock)(id obj) = ^(id obj)
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
     
-    SEL sel = NSSelectorFromString(@"piyo");
-    IMP imp = imp_implementationWithBlock(piyoBlock);
-    class_addMethod([ViewController class], sel, imp, "v@");
-    
-    [self performSelector:@selector(piyo)];
-    
-
     for (NSNumber *number in array) {
         NSLog(@"number: %@", number);
         [array removeObject:target];
     }
     
     NSLog(@"array: %@", array);
+}
+
+- (void)addMethodImplementationWithBlocks {
+    SEL sel = NSSelectorFromString(@"piyo");
+    IMP imp = imp_implementationWithBlock(piyoBlock);
+    class_addMethod([ViewController class], sel, imp, "v@");
+    
+    [self performSelector:@selector(piyo)];
 }
 
 - (void)getClassName {
