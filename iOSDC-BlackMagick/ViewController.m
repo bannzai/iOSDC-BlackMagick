@@ -19,9 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self addClass];
+    [self encodeType];
+    
 }
 
+- (void) encodeType {
+    
+    NSLog(@"char       : %s", @encode( typeof( char  ) ) );
+    NSLog(@"char *     : %s", @encode( typeof( char *) ) );
+    NSLog(@"int        : %s", @encode( typeof( int   ) ) );
+    NSLog(@"float      : %s", @encode( typeof( float ) ) );
+    NSLog(@"float *    : %s", @encode( typeof( float*) ) );
+    NSLog(@"void       : %s", @encode( typeof( void  ) ) );
+    NSLog(@"void *     : %s", @encode( typeof( void *) ) );
+    NSLog(@"NSString * : %s", @encode( typeof( NSString *) ) );
+    NSLog(@"NSObject * : %s", @encode( typeof( NSObject *) ) );
+    NSLog(@"NSObject : %s", @encode(NSObject));
+    NSLog(@"void : %s", @encode(void) );
+    NSLog(@"type of void : %s", @encode( typeof( void) ) );
+    NSLog(@"type of void : %s", @encode(id) );
+}
+    
 - (void)enumerationMutation {
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
