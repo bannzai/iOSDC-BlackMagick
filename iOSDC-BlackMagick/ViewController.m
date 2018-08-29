@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <objc/runtime.h>
 #import "TableViewCell.h"
+#import "NSObject+Name.h"
 
 
 @protocol MyProtocol
@@ -99,7 +100,6 @@ static const char * getPropertyType(objc_property_t property) {
     return [NSDictionary dictionaryWithDictionary:results];
 }
 
-void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy);
 
 
 - (void)viewDidLoad {
@@ -112,11 +112,14 @@ void objc_setAssociatedObject(id object, const void *key, id value, objc_Associa
     self.tableView.dataSource = self;
     
     [self.tableView reloadData];
+//
+//    Class kls = objc_getClass("NSString");
+//    [self addMethodImplementationWithBlocks];
+//
+//    NSLog(@"properties: %@", [ViewController properties:[Hoge class]]);
     
-    Class kls = objc_getClass("NSString");
-    [self addMethodImplementationWithBlocks];
+    [self enumerationMutation];
     
-    NSLog(@"properties: %@", [ViewController properties:[Hoge class]]);
 }
 
 - (NSArray *)getAllClassName {
@@ -180,11 +183,13 @@ void objc_setAssociatedObject(id object, const void *key, id value, objc_Associa
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
     
+//    objc_setEnumerationMutationHandler(function);
     for (NSNumber *number in array) {
         NSLog(@"number: %@", number);
         [array removeObject:target];
     }
     
+
     NSLog(@"array: %@", array);
 }
 
@@ -192,11 +197,11 @@ void function(NSMutableArray *array) {
     NSLog(@"%@", array);
 }
 
-void objc_enumerationMutation(id obj) {
-    NSLog(@"%@", obj);
-    //    NSException *exception = [NSException exceptionWithName:@"Array Error" reason:@"Exception" userInfo:nil];
-    //    [exception raise];
-}
+//void objc_enumerationMutation(id obj) {
+//    NSLog(@"%@", obj);
+//    //    NSException *exception = [NSException exceptionWithName:@"Array Error" reason:@"Exception" userInfo:nil];
+//    //    [exception raise];
+//}
 
 - (void)addClass {
     Class aClass = objc_allocateClassPair([NSObject class], "A", sizeof([NSObject new]));

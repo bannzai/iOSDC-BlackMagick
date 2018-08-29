@@ -9,8 +9,9 @@
 #import "NSObject+Name.h"
 #import <objc/runtime.h>
 
-static void *kAssociatedObjectKeyForName = "kAssociatedObjectKeyForName";
 
+
+static void *kAssociatedObjectKeyForName = "kAssociatedObjectKeyForName";
 @implementation NSObject (Name)
 
 - (NSString *)name {
@@ -22,3 +23,6 @@ static void *kAssociatedObjectKeyForName = "kAssociatedObjectKeyForName";
 }
 
 @end
+
+
+

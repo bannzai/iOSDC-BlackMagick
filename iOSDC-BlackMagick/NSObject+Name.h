@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Name)
-
 @property (nonatomic) NSString *name;
 @end
+
