@@ -15,6 +15,8 @@
 		BAAEDBDD212C3F5C00EF94F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBDC212C3F5C00EF94F6 /* main.m */; };
 		BAAEDBE7212C3F5C00EF94F6 /* iOSDC_BlackMagickTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBE6212C3F5C00EF94F6 /* iOSDC_BlackMagickTests.m */; };
 		BAAEDBF2212C3F5C00EF94F6 /* iOSDC_BlackMagickUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBF1212C3F5C00EF94F6 /* iOSDC_BlackMagickUITests.m */; };
+		BAF8367F2136553200E10C49 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF8367D2136553200E10C49 /* TableViewCell.m */; };
+		BAF836802136553200E10C49 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAF8367E2136553200E10C49 /* TableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		BAAEDBED212C3F5C00EF94F6 /* iOSDC-BlackMagickUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOSDC-BlackMagickUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAEDBF1212C3F5C00EF94F6 /* iOSDC_BlackMagickUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSDC_BlackMagickUITests.m; sourceTree = "<group>"; };
 		BAAEDBF3212C3F5C00EF94F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAF8367C2136553200E10C49 /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		BAF8367D2136553200E10C49 /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		BAF8367E2136553200E10C49 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +110,9 @@
 				BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */,
 				BAAEDBD0212C3F5B00EF94F6 /* ViewController.h */,
 				BAAEDBD1212C3F5B00EF94F6 /* ViewController.m */,
+				BAF8367C2136553200E10C49 /* TableViewCell.h */,
+				BAF8367D2136553200E10C49 /* TableViewCell.m */,
+				BAF8367E2136553200E10C49 /* TableViewCell.xib */,
 				BAAEDBD3212C3F5B00EF94F6 /* Main.storyboard */,
 				BAAEDBD6212C3F5C00EF94F6 /* Assets.xcassets */,
 				BAAEDBD8212C3F5C00EF94F6 /* LaunchScreen.storyboard */,
@@ -236,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAAEDBDA212C3F5C00EF94F6 /* LaunchScreen.storyboard in Resources */,
+				BAF836802136553200E10C49 /* TableViewCell.xib in Resources */,
 				BAAEDBD7212C3F5C00EF94F6 /* Assets.xcassets in Resources */,
 				BAAEDBD5212C3F5B00EF94F6 /* Main.storyboard in Resources */,
 			);
@@ -263,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAAEDBD2212C3F5B00EF94F6 /* ViewController.m in Sources */,
+				BAF8367F2136553200E10C49 /* TableViewCell.m in Sources */,
 				BAAEDBDD212C3F5C00EF94F6 /* main.m in Sources */,
 				BAAEDBCF212C3F5B00EF94F6 /* AppDelegate.m in Sources */,
 			);

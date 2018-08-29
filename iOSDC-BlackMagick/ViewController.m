@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <objc/runtime.h>
+#import "TableViewCell.h"
 
 
 @protocol MyProtocol
@@ -17,7 +18,7 @@
 - (void)bar;
 @end
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
@@ -26,14 +27,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self encodeType];
     
-    for (id name in [self getAllClassName]) {
-        NSLog(@"name: %@", name);
-    }
+    UINib *nib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"Cell"];
     
-    NSLog(@"%@", [ViewController implementedClasses:@protocol(MyProtocol)]);
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self.tableView reloadData];
 }
 
 - (NSArray *)getAllClassName {
@@ -42,7 +43,7 @@
     
     classes =  (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
     numClasses = objc_getClassList(classes, numClasses);
-
+    
     NSMutableArray *result = [NSMutableArray array];
     for (NSInteger i = 0; i < numClasses; i++)
     {
@@ -144,6 +145,23 @@ void (^piyoBlock)(id obj) = ^(id obj)
     numClasses = objc_getClassList(NULL, 0);
     
     NSLog(@"count: %d", numClasses);
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TableViewCell *cell = (TableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    cell.titleLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    [cell performSelector:@selector(_removeFloatingSeparator)];
+    
+    NSLog(@"tableView: %d", [cell performSelector:@selector(_showSeparatorAtTopOfSection)]);
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
 }
 
 @end
