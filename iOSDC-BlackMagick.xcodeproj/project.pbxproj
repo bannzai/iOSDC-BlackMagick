@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA38F43D2136A0210076C372 /* NSObject+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = BA38F43C2136A0210076C372 /* NSObject+Name.m */; };
 		BAAEDBCF212C3F5B00EF94F6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */; };
 		BAAEDBD2212C3F5B00EF94F6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBD1212C3F5B00EF94F6 /* ViewController.m */; };
 		BAAEDBD5212C3F5B00EF94F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAEDBD3212C3F5B00EF94F6 /* Main.storyboard */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA38F43B2136A0210076C372 /* NSObject+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Name.h"; sourceTree = "<group>"; };
+		BA38F43C2136A0210076C372 /* NSObject+Name.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Name.m"; sourceTree = "<group>"; };
 		BAAEDBCA212C3F5B00EF94F6 /* iOSDC-BlackMagick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOSDC-BlackMagick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAEDBCD212C3F5B00EF94F6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */,
 				BAAEDBD0212C3F5B00EF94F6 /* ViewController.h */,
 				BAAEDBD1212C3F5B00EF94F6 /* ViewController.m */,
+				BA38F43B2136A0210076C372 /* NSObject+Name.h */,
+				BA38F43C2136A0210076C372 /* NSObject+Name.m */,
 				BAF8367C2136553200E10C49 /* TableViewCell.h */,
 				BAF8367D2136553200E10C49 /* TableViewCell.m */,
 				BAF8367E2136553200E10C49 /* TableViewCell.xib */,
@@ -275,6 +280,7 @@
 				BAF8367F2136553200E10C49 /* TableViewCell.m in Sources */,
 				BAAEDBDD212C3F5C00EF94F6 /* main.m in Sources */,
 				BAAEDBCF212C3F5B00EF94F6 /* AppDelegate.m in Sources */,
+				BA38F43D2136A0210076C372 /* NSObject+Name.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

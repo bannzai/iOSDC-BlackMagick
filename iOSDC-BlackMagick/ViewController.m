@@ -18,11 +18,88 @@
 - (void)bar;
 @end
 
+@interface Fuga: NSObject
+
+@end
+
+@implementation Fuga
+
+@end
+
+@interface Hoge: NSObject
+@property (nonatomic, copy) NSString *name;
+@end
+
+@implementation Hoge
+
+@end
+
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation ViewController
+
+
+static const char * getPropertyType(objc_property_t property) {
+    const char *attributes = property_getAttributes(property);
+//    printf("attributes=%s\n", attributes);
+    char buffer[1 + strlen(attributes)];
+    strcpy(buffer, attributes);
+    char *state = buffer, *attribute;
+    while ((attribute = strsep(&state, ",")) != NULL) {
+        if (attribute[0] == 'T' && attribute[1] != '@') {
+            // it's a C primitive type:
+            /*
+             if you want a list of what will be returned for these primitives, search online for
+             "objective-c" "Property Attribute Description Examples"
+             apple docs list plenty of examples of what you get for int "i", long "l", unsigned "I", struct, etc.
+             */
+            return (const char *)[[NSData dataWithBytes:(attribute + 1) length:strlen(attribute) - 1] bytes];
+        }
+        else if (attribute[0] == 'T' && attribute[1] == '@' && strlen(attribute) == 2) {
+            // it's an ObjC id type:
+            return "id";
+        }
+        else if (attribute[0] == 'T' && attribute[1] == '@') {
+            // it's another ObjC object type:
+            return (const char *)[[NSData dataWithBytes:(attribute + 3) length:strlen(attribute) - 4] bytes];
+        }
+    }
+    return "";
+}
+
++ (NSDictionary *)properties:(Class)cls
+{
+    NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
+    
+    unsigned int outCount, i;
+    objc_property_t *properties = class_copyPropertyList(cls, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        const char *propName = property_getName(property);
+        if(propName) {
+            const char *propType = getPropertyType(property);
+            NSString *propertyName = [NSString stringWithUTF8String:propName];
+            NSString *propertyType = [NSString stringWithUTF8String:propType];
+            if (!propertyType) {
+                NSLog(@" --- nil type --- ");
+                NSLog(@"propertyName: %@", propertyName);
+                NSLog(@"raw type: %s", propType);
+                NSLog(@"type: %@", propertyType);
+                continue;
+            }
+               
+            [results setObject:propertyType forKey:propertyName];
+        }
+    }
+    free(properties);
+    
+    // returning a copy here to make sure the dictionary is immutable
+    return [NSDictionary dictionaryWithDictionary:results];
+}
+
+void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy);
 
 
 - (void)viewDidLoad {
@@ -35,6 +112,11 @@
     self.tableView.dataSource = self;
     
     [self.tableView reloadData];
+    
+    Class kls = objc_getClass("NSString");
+    [self addMethodImplementationWithBlocks];
+    
+    NSLog(@"properties: %@", [ViewController properties:[Hoge class]]);
 }
 
 - (NSArray *)getAllClassName {
@@ -84,12 +166,14 @@
     NSLog(@"float *    : %s", @encode( typeof( float*) ) );
     NSLog(@"void       : %s", @encode( typeof( void  ) ) );
     NSLog(@"void *     : %s", @encode( typeof( void *) ) );
-    NSLog(@"NSString * : %s", @encode( typeof( NSString *) ) );
+    NSLog(@"type of NSString * : %s", @encode( typeof( NSString *) ) );
+    NSLog(@"NSString : %s", @encode(NSString));
     NSLog(@"NSObject * : %s", @encode( typeof( NSObject *) ) );
     NSLog(@"NSObject : %s", @encode(NSObject));
     NSLog(@"void : %s", @encode(void) );
     NSLog(@"type of void : %s", @encode( typeof( void) ) );
-    NSLog(@"type of void : %s", @encode(id) );
+    NSLog(@"type of id : %s", @encode(id) );
+    NSLog(@"NSArray : %s", @encode(typeof(NSArray)) );
 }
     
 - (void)enumerationMutation {
@@ -130,7 +214,7 @@ void (^piyoBlock)(id obj) = ^(id obj)
 };
 
 - (void)addMethodImplementationWithBlocks {
-    SEL sel = NSSelectorFromString(@"piyo");
+    SEL sel = sel_registerName("piyo");
     IMP imp = imp_implementationWithBlock(piyoBlock);
     class_addMethod([ViewController class], sel, imp, "v@");
     
@@ -156,7 +240,7 @@ void (^piyoBlock)(id obj) = ^(id obj)
     cell.titleLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     [cell performSelector:@selector(_removeFloatingSeparator)];
     
-    NSLog(@"tableView: %d", [cell performSelector:@selector(_showSeparatorAtTopOfSection)]);
+//    NSLog(@"tableView: %d", [cell performSelector:@selector(_showSeparatorAtTopOfSection)]);
     return cell;
 }
 
