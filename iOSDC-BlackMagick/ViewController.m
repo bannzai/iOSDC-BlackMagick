@@ -120,7 +120,25 @@ static const char * getPropertyType(objc_property_t property) {
     
     [self enumerationMutation];
     
+    NSObject *object = [NSObject new];
+    NSLog(@"object: %@", object.userInfo); // object: (null)
+    object.userInfo = @"myName";
+    NSLog(@"object: %@", object.userInfo); // object: myName
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.userInfo = @(100);
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.userInfo = label;
+    [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)buttonPressed:(UIButton*) button {
+    UILabel *label = button.userInfo;
+    NSInteger value = [label.userInfo integerValue];
+    button.tag = value;
+}
+
 
 - (NSArray *)getAllClassName {
     int numClasses = objc_getClassList(NULL, 0);
@@ -183,7 +201,7 @@ static const char * getPropertyType(objc_property_t property) {
     NSNumber *target = @2;
     NSMutableArray *array = @[@1, target].mutableCopy;
     
-//    objc_setEnumerationMutationHandler(function);
+    objc_setEnumerationMutationHandler(function);
     for (NSNumber *number in array) {
         NSLog(@"number: %@", number);
         [array removeObject:target];
@@ -251,6 +269,12 @@ void (^piyoBlock)(id obj) = ^(id obj)
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SecondViewController" bundle:nil];
+    UIViewController *secondViewController = [storyboard instantiateInitialViewController];
+    [self.navigationController pushViewController:secondViewController animated:true];
 }
 
 @end

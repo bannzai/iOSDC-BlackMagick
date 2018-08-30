@@ -11,15 +11,15 @@
 
 
 
-static void *kAssociatedObjectKeyForName = "kAssociatedObjectKeyForName";
+static void *kAssociatedObjectKeyForUserInfo = "kAssociatedObjectKeyForUserInfo";
 @implementation NSObject (Name)
 
-- (NSString *)name {
-    return (NSString *)objc_getAssociatedObject(self, kAssociatedObjectKeyForName);
+- (id)userInfo {
+    return objc_getAssociatedObject(self, kAssociatedObjectKeyForUserInfo);
 }
 
-- (void)setName:(NSString *)name {
-    objc_setAssociatedObject(self, kAssociatedObjectKeyForName, name, OBJC_ASSOCIATION_RETAIN);
+- (void)setUserInfo:(id)userInfo {
+    objc_setAssociatedObject(self, kAssociatedObjectKeyForUserInfo, userInfo, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

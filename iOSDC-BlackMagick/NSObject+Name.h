@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Name)
-@property (nonatomic) NSString *name;
+@interface NSObject (UserInfo)
+@property (nonatomic) id userInfo;
 @end
-

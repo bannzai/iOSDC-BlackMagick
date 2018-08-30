@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BA38F43D2136A0210076C372 /* NSObject+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = BA38F43C2136A0210076C372 /* NSObject+Name.m */; };
+		BA38F4402137C4390076C372 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA38F43F2137C4390076C372 /* SecondViewController.m */; };
+		BA38F4422137C44D0076C372 /* SecondViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA38F4412137C44D0076C372 /* SecondViewController.storyboard */; };
 		BAAEDBCF212C3F5B00EF94F6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */; };
 		BAAEDBD2212C3F5B00EF94F6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAEDBD1212C3F5B00EF94F6 /* ViewController.m */; };
 		BAAEDBD5212C3F5B00EF94F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAAEDBD3212C3F5B00EF94F6 /* Main.storyboard */; };
@@ -40,6 +42,9 @@
 /* Begin PBXFileReference section */
 		BA38F43B2136A0210076C372 /* NSObject+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Name.h"; sourceTree = "<group>"; };
 		BA38F43C2136A0210076C372 /* NSObject+Name.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Name.m"; sourceTree = "<group>"; };
+		BA38F43E2137C4390076C372 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		BA38F43F2137C4390076C372 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		BA38F4412137C44D0076C372 /* SecondViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondViewController.storyboard; sourceTree = "<group>"; };
 		BAAEDBCA212C3F5B00EF94F6 /* iOSDC-BlackMagick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOSDC-BlackMagick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAEDBCD212C3F5B00EF94F6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -113,6 +118,9 @@
 				BAAEDBCE212C3F5B00EF94F6 /* AppDelegate.m */,
 				BAAEDBD0212C3F5B00EF94F6 /* ViewController.h */,
 				BAAEDBD1212C3F5B00EF94F6 /* ViewController.m */,
+				BA38F43E2137C4390076C372 /* SecondViewController.h */,
+				BA38F43F2137C4390076C372 /* SecondViewController.m */,
+				BA38F4412137C44D0076C372 /* SecondViewController.storyboard */,
 				BA38F43B2136A0210076C372 /* NSObject+Name.h */,
 				BA38F43C2136A0210076C372 /* NSObject+Name.m */,
 				BAF8367C2136553200E10C49 /* TableViewCell.h */,
@@ -250,6 +258,7 @@
 			files = (
 				BAAEDBDA212C3F5C00EF94F6 /* LaunchScreen.storyboard in Resources */,
 				BAF836802136553200E10C49 /* TableViewCell.xib in Resources */,
+				BA38F4422137C44D0076C372 /* SecondViewController.storyboard in Resources */,
 				BAAEDBD7212C3F5C00EF94F6 /* Assets.xcassets in Resources */,
 				BAAEDBD5212C3F5B00EF94F6 /* Main.storyboard in Resources */,
 			);
@@ -276,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA38F4402137C4390076C372 /* SecondViewController.m in Sources */,
 				BAAEDBD2212C3F5B00EF94F6 /* ViewController.m in Sources */,
 				BAF8367F2136553200E10C49 /* TableViewCell.m in Sources */,
 				BAAEDBDD212C3F5C00EF94F6 /* main.m in Sources */,
